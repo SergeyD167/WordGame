@@ -19,11 +19,11 @@ enum LetterState {
             case .unverified:
                 return .clear
             case .correctPosition:
-                return .systemGreen
+                return #colorLiteral(red: 0, green: 0.8705882353, blue: 0.0431372549, alpha: 1)
             case .wrongPosition:
                 return .white
             case .notInWord:
-                return .gray
+                return #colorLiteral(red: 0.5843137255, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
             }
         }
 
@@ -123,16 +123,16 @@ extension KeyboardView: UICollectionViewDelegateFlowLayout, UICollectionViewDele
         case "✓":
             guard let isActive = delegate?.isSubmitActive else { break }
             if isActive {
-                cell.configure(with: letter, font: .board, state: .wrongPosition)
+                cell.configure(with: letter, font: .buttons, state: .wrongPosition)
             } else {
-                cell.configure(with: letter, font: .board, state: .notInWord)
+                cell.configure(with: letter, font: .buttons, state: .notInWord)
             }
         case "⌫":
             guard let isActive = delegate?.isDeleteActive else { break }
             if isActive {
-                cell.configure(with: letter, font: .board, state: .wrongPosition)
+                cell.configure(with: letter, font: .buttons, state: .wrongPosition)
             } else {
-                cell.configure(with: letter, font: .board, state: .notInWord)
+                cell.configure(with: letter, font: .buttons, state: .notInWord)
             }
         default:
             cell.configure(with: letter, font: .keyboard, state: letterState)
@@ -141,25 +141,24 @@ extension KeyboardView: UICollectionViewDelegateFlowLayout, UICollectionViewDele
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let totalSpacing: CGFloat = 8 * CGFloat(12 - 1)
-        let itemWidth = (collectionView.frame.width - totalSpacing) / 12
+        let itemWidth = collectionView.frame.width / 14
+        let itemHeight = collectionView.frame.height / 5
 
         if indexPath.section == 2 && (indexPath.item == 0 || indexPath.item == 10) {
-            return CGSize(width: itemWidth * 2 + 8, height: 50)
+            return CGSize(width: itemWidth * 1.75, height: itemHeight)
         }
         
-        return CGSize(width: itemWidth, height: 50)
+        return CGSize(width: itemWidth, height: itemHeight)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let totalSpacing: CGFloat = 8
-        let numberOfItemsInRow = (section == 0) ? 12 : (section == 1) ? 11 : 13
-        let itemWidth = (collectionView.frame.width - totalSpacing * CGFloat(numberOfItemsInRow - 1)) / CGFloat(numberOfItemsInRow)
-        let totalCellWidth = itemWidth * CGFloat(numberOfItemsInRow)
-        let totalRowWidth = totalCellWidth + CGFloat(numberOfItemsInRow - 1) * totalSpacing
-        let horizontalInset = max((collectionView.frame.width - totalRowWidth) / 2, 0)
+        let itemWidth = collectionView.frame.width / 14
 
-        return UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
+        if section == 1 {
+            return UIEdgeInsets(top: 5, left: itemWidth, bottom: 5, right: itemWidth)
+        }
+        
+        return UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 2)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

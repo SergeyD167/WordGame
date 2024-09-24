@@ -41,14 +41,14 @@ private extension GameViewController {
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            boardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            boardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             boardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             boardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             boardView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7),
             
             keyboardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             keyboardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            keyboardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            keyboardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             keyboardView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25)
         ])
     }

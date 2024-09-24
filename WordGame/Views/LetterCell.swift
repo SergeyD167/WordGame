@@ -10,6 +10,7 @@ import UIKit
 enum CellFont {
     case board
     case keyboard
+    case buttons
 }
 
 final class LetterCell: UICollectionViewCell {
@@ -58,6 +59,7 @@ final class LetterCell: UICollectionViewCell {
         static let borderWidth: CGFloat = 1
         static let sizeForBoard: CGFloat = 36
         static let sizeForKeyboard: CGFloat = 18
+        static let sizeForButton: CGFloat = 28
     }
 }
 
@@ -84,6 +86,8 @@ private extension LetterCell {
             letterLabel.font = .systemFont(ofSize: UIConstants.sizeForBoard, weight: .semibold)
         case .keyboard:
             letterLabel.font = .systemFont(ofSize: UIConstants.sizeForKeyboard, weight: .medium)
+        case .buttons:
+            letterLabel.font = .systemFont(ofSize: UIConstants.sizeForButton, weight: .medium)
         }
     }
     
