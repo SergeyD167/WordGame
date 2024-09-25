@@ -26,7 +26,7 @@ final class MenuViewController: UIViewController {
     private let newGameButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .white
-        button.setTitle("Начать новую игру", for: .normal)
+        button.setTitle(Keys.Menu.newGame, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: UIConstants.buttonFont)
         button.layer.cornerRadius = UIConstants.cornerRadius
@@ -37,7 +37,7 @@ final class MenuViewController: UIViewController {
     private let continueGameButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .white
-        button.setTitle("Продолжить текущую игру", for: .normal)
+        button.setTitle(Keys.Menu.continueGame, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: UIConstants.buttonFont)
         button.layer.cornerRadius = UIConstants.cornerRadius

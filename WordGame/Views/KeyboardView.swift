@@ -19,11 +19,11 @@ enum LetterState {
             case .unverified:
                 return .clear
             case .correctPosition:
-                return #colorLiteral(red: 0, green: 0.8705882353, blue: 0.0431372549, alpha: 1)
+                return Keys.Colors.green
             case .wrongPosition:
                 return .white
             case .notInWord:
-                return #colorLiteral(red: 0.5843137255, green: 0.5803921569, blue: 0.5803921569, alpha: 1)
+                return Keys.Colors.gray
             }
         }
 
@@ -75,6 +75,13 @@ final class KeyboardView: UIView {
         
         return collectionVIew
     }()
+    
+    //MARK: Private constants
+    private enum UIConstants {
+        static let minimumSpacing: CGFloat = 10
+        static let sectionInset: CGFloat = 5
+        static let numberOfItems: CGFloat = 5
+    }
 }
 
 //MARK: Private methods
@@ -120,14 +127,14 @@ extension KeyboardView: UICollectionViewDelegateFlowLayout, UICollectionViewDele
         let letterState = delegate?.keyboardView(stateForKey: letter) ?? .unverified
         
         switch letter {
-        case "✓":
+        case Keys.Keyboard.submit:
             guard let isActive = delegate?.isSubmitActive else { break }
             if isActive {
                 cell.configure(with: letter, font: .buttons, state: .wrongPosition)
             } else {
                 cell.configure(with: letter, font: .buttons, state: .notInWord)
             }
-        case "⌫":
+        case Keys.Keyboard.delete:
             guard let isActive = delegate?.isDeleteActive else { break }
             if isActive {
                 cell.configure(with: letter, font: .buttons, state: .wrongPosition)

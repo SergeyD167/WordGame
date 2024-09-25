@@ -54,8 +54,8 @@ private extension GameViewController {
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: "Поздравляем!", message: "Вы угадали слово! Начинается новый раунд.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+        let alert = UIAlertController(title: Keys.Game.congratulations, message: Keys.Game.win, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Oк", style: .default) { _ in
             self.viewModel.resetGameState()
             self.boardView.reloadData()
             self.keyboardView.reloadData()
@@ -65,15 +65,15 @@ private extension GameViewController {
     }
     
     func showGameOverAlert() {
-        let alert = UIAlertController(title: "Игра окончена", message: "К сожалению, попытки закончились. Загаданное слово было \(viewModel.answer). Вы можете сыграть еще раз.", preferredStyle: .alert)
+        let alert = UIAlertController(title: Keys.Game.gameOver, message: Keys.Game.lose + viewModel.answer + Keys.Game.restart, preferredStyle: .alert)
         
-        let playAgainAction = UIAlertAction(title: "Играть еще раз", style: .default) { _ in
+        let playAgainAction = UIAlertAction(title: Keys.Game.again, style: .default) { _ in
             self.viewModel.resetGameState()
             self.boardView.reloadData()
             self.keyboardView.reloadData()
         }
         
-        let exitAction = UIAlertAction(title: "Выйти из игры", style: .destructive) { _ in
+        let exitAction = UIAlertAction(title: Keys.Game.exit, style: .destructive) { _ in
             self.viewModel.resetGameState()
             self.viewModel.popToRoot()
         }
@@ -85,12 +85,12 @@ private extension GameViewController {
     
     func setupNavigationBar() {
         let titleLabel = UILabel()
-        titleLabel.text = "5 букв"
+        titleLabel.text = Keys.Game.words
         titleLabel.textColor = .white
         titleLabel.font = .boldSystemFont(ofSize: 18)
         navigationItem.titleView = titleLabel
         
-        let boldChevron = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        let boldChevron = UIImage(systemName: Keys.Images.backButton, withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
         let backButton = UIBarButtonItem(image: boldChevron, style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.tintColor = .white
         navigationItem.leftBarButtonItem = backButton
@@ -138,9 +138,9 @@ extension GameViewController: KeyboardViewDelegate {
     
     func keyboardView(didTapKey letter: Character) {
         switch letter {
-        case "✓":
+        case Keys.Keyboard.submit:
             submitInput()
-        case "⌫":
+        case Keys.Keyboard.delete:
             deleteLastCharacter()
         default:
             appendToTextField(letter: letter)
