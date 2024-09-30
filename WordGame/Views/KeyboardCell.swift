@@ -15,12 +15,7 @@ final class KeyboardCell: UICollectionViewCell {
     func configure(with letter: Character) {
         letterLabel.text = String(letter).uppercased()
     }
-    
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        letterLabel.text = nil
-//    }
-    
+
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
